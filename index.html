@@ -3,46 +3,64 @@
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
-  <title>Inbox</title>
+  <title>Inbox - Gmail</title>
+  <link href="https://fonts.googleapis.com/css2?family=Roboto:wght@400;500&display=swap" rel="stylesheet">
+  <script src="https://kit.fontawesome.com/b1c5b9dbea.js" crossorigin="anonymous"></script>
 </head>
-<body>
-  <div class="inbox-container">
-    <div class="email-list" id="emailList">
-      <!-- Email list will be populated here -->
-    </div>
-    <div class="email-viewer" id="emailViewer">
-      <p>Select an email to view its content.</p>
-    </div>
+<body style="font-family: 'Roboto', sans-serif; margin: 0;">
+
+  <!-- Header -->
+  <header style="display: flex; align-items: center; padding: 10px; background-color: #f1f3f4; border-bottom: 1px solid #ddd;">
+    <img src="resources/logo.svg" alt="Gmail Logo" height="30" style="margin-right: 10px;">
+    <h1 style="font-size: 1.2rem;">Inbox</h1>
+  </header>
+
+  <!-- Main Content -->
+  <div style="display: flex; height: 90vh;">
+    <!-- Email List -->
+    <aside style="width: 300px; border-right: 1px solid #ddd; overflow-y: auto;">
+      <ul id="email-list" style="list-style: none; padding: 0; margin: 0;">
+        <!-- Emails populated by JS -->
+      </ul>
+    </aside>
+
+    <!-- Email Viewer -->
+    <main style="flex: 1; padding: 20px; overflow-y: auto;">
+      <iframe id="email-viewer" src="" style="width: 100%; height: 100%; border: none;"></iframe>
+    </main>
   </div>
 
   <script>
-    async function loadEmails() {
-      try {
-        const response = await fetch('emails/manifest.json');
-        const emailFiles = await response.json();
-
-        const emailListEl = document.getElementById('emailList');
-
-        emailFiles.forEach((file, index) => {
-          const item = document.createElement('div');
-          item.textContent = file.replace('.html', '');
-          item.dataset.file = file;
-          item.onclick = () => loadEmail(file);
-          emailListEl.appendChild(item);
-        });
-      } catch (err) {
-        console.error('Error loading manifest:', err);
-      }
+    async function loadManifest() {
+      const response = await fetch("emails/manifest.json");
+      const manifest = await response.json();
+      return manifest.files;
     }
 
-    async function loadEmail(filename) {
-      try {
-        const response = await fetch(`emails/${filename}`);
-        const html = await response.text();
-        document.getElementById('emailViewer').innerHTML = html;
-      } catch (err) {
-        console.error('Error loading email:', err);
-      }
+    function createEmailPreview(filename) {
+      const li = document.createElement("li");
+      li.style.borderBottom = "1px solid #eee";
+      li.style.padding = "15px";
+      li.style.cursor = "pointer";
+      li.addEventListener("click", () => {
+        document.getElementById("email-viewer").src = `emails/${filename}`;
+      });
+
+      li.innerHTML = `
+        <div style="font-weight: 500;">${filename.replace(".html", "")}</div>
+        <div style="color: #666; font-size: 0.9em;">Click to view email</div>
+      `;
+      return li;
+    }
+
+    async function loadEmails() {
+      const files = await loadManifest();
+      const list = document.getElementById("email-list");
+      files.forEach(file => {
+        if (file.endsWith(".html")) {
+          list.appendChild(createEmailPreview(file));
+        }
+      });
     }
 
     loadEmails();
