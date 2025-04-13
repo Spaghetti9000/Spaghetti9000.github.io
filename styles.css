@@ -1,0 +1,281 @@
+*,*::before,*::after{
+   margin: 0;
+   padding: 0;
+   box-sizing: border-box;
+}
+body{
+    font-family: 'Roboto', sans-serif;
+}
+nav{
+    height: 62px;
+    background-color:rgb(246, 254, 255);
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    position: relative;
+    padding: 0 1rem;
+}
+.container-wrapper{
+    min-width: 1300px;
+}
+.nav-logo{
+    display: flex;
+    gap: .9rem;
+    align-items: center;
+}
+.nav-logo img{
+    position: sticky;
+    top:.3rem;
+}
+.nav-logo span{
+    color: #2a2828;
+    font-size: 1.6rem;
+}
+.nav-search{
+    height: 46px;
+    width: 720px;
+    display: flex;
+    flex-direction: row;
+    justify-content: center;
+    background-color:rgb(231, 243, 244);
+    border-radius: 10px;
+    padding: .4rem;
+}
+.nav-search .search {
+    align-self:center;
+    font-size: 1.2rem;
+    padding: .5rem;
+}
+.nav-search .slider {
+    align-self: center;
+    justify-self: center;
+    font-size: 1.2rem;
+    padding: .5rem;
+}
+.nav-search input{
+    font-size: 1rem;
+    flex:0 0 90%;
+    border:0;
+    outline:0;
+    background-color:transparent;
+}
+.nav-search input::placeholder{
+    font-size: 1rem;
+    padding: .4rem;
+}
+.nav-aside{
+    display: flex;
+    gap: 1rem;
+    align-items: center;
+}
+.nav-aside img{
+    align-self: end;
+    border-radius: 50%;
+}
+.grid-content{
+    display: grid;
+    width: 100%;
+    grid-template-columns:1fr 20fr 1fr;
+}
+.grid-content .leftnav{
+    background-color: rgb(246, 254, 255);
+}
+.leftnav ul{
+    list-style-type: none;
+    margin: 0;
+    padding: 0;
+    text-align: center;
+}
+.leftnav ul li {
+    padding:.5rem 0;
+}
+.leftnav ul li .fa-pen{
+    font-size: 1.2rem;
+    background-color: powderblue;
+    padding: 1.1rem;
+    border-radius: 10px;
+}
+
+.leftnav ul li .fa-inbox{
+    background-color: powderblue;
+    padding:.4rem;
+    border-radius: 10px;
+    position: relative;
+}
+.leftnav ul li .fa-inbox::after{
+    content: ".";
+    font-size: 2.8rem;
+    position: absolute;
+    top: -1.7rem;
+    right: .1rem;
+    color: red;
+}
+.leftnav ul li .fa-clipboard{
+    position: relative;
+}
+.leftnav ul li .fa-clipboard::after{
+    content: ".";
+    font-size: 4rem;
+    position: absolute;
+    top: -3.2rem;
+    left:.3rem;
+    color: red;
+}
+
+.leftnav .partitioned{
+    margin-top: 2.5rem;
+}
+.grid-content .rightnav{
+    background-color: rgb(246, 254, 255);
+}
+.rightnav ul{
+    list-style-type: none;
+    margin: 0;
+    padding: 0;
+    text-align: center;
+}
+.rightnav ul li {
+    padding: .9rem 0;
+}
+.rightnav .partitioned{
+    margin-top: 5rem;
+}
+.grid-content .main{
+    border-radius: 15px;
+}
+.main .top{
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    background-color: white;
+}
+.main .top .first-set ul{
+list-style-type: none;
+margin: 0;
+padding: 0;
+}
+.first-set ul li{
+    display: inline-block;
+    padding: .7rem .8rem;
+}
+.first-set ul li a{
+    text-decoration: none;
+    color:rgb(52, 49, 49);
+}
+.main .top .second-set ul{
+list-style-type: none;
+margin: 0;
+padding: 0;
+}
+.second-set ul li{
+    font-size: .8rem;
+    display: inline-block;
+    padding: .7rem .8rem;
+}
+.second-set ul li a {
+    text-decoration: none;
+    color: gray;
+}
+.second-set ul li:nth-child(3) a,
+.second-set ul li:nth-child(4) a{
+     color: black;
+}
+.main .content {
+    background-color: white;
+    position: sticky;
+    top:0;
+    border-bottom: 1px solid rgb(229, 218, 218);
+}
+.main .content ul li {
+    font-size: 1rem;
+    display: inline-block;
+    padding: .8rem 5rem;
+}
+.main .content ul li:first-child{
+    padding: 1rem;
+}
+.main .content ul li:nth-child(2) a{
+     color:#0B57D0;
+     position: relative;
+}
+.main .content ul li:nth-child(2) a::before{
+    content: '';
+    position: absolute;
+    left: -.8rem;
+    bottom: -1.4rem;
+    background-color:#0B57D0;
+    height: 3px;
+    width: 15rem;
+}
+.main .content ul li a{
+    text-decoration: none;
+    color: rgb(85, 81, 81);
+}
+.content ul li .updates {
+    display: flex;
+    flex-direction: row;
+    gap: .5rem;
+}
+.content ul li .updates i {
+    align-self: center;
+}
+.content ul li .updates .update span {
+    color: white;
+    font-size: .7rem;
+    background-color: #E37400;
+    padding: .1rem .4rem;
+    border-radius: 50px;
+}
+.content ul li .updates .update .sub-text {
+    padding-top: .2rem;
+    font-size: .8rem;
+    opacity: .6;
+}
+.main .content i {
+    padding-right: .6rem;
+}
+.main .mails ul {
+    margin: 0;
+    padding: 0;
+    list-style-type: none;
+}
+.main .mails ul li{
+    padding: .7rem .3rem;
+    border-bottom: 1px solid rgb(229, 218, 218);
+}
+.main .mails ul li a {
+    font-weight: 500;
+    font-size: .9rem;
+    display: flex;
+    gap: .5rem;
+    text-decoration: none;
+    color:black;
+}
+.main .mails ul li a .head{
+    flex: 0 0 170px;
+  /* background-color: red; */
+}
+.main .mails ul li a .text{
+    flex: 0 1 78%;
+/* background-color: yellow; */
+}
+.main .mails ul li a .text > .detail{
+    flex: 0 1 auto;
+    color: gray;
+    font-weight: 400;
+}
+.main .mails ul li a .time{
+    flex: 0 0 70px;
+    display: flex;
+    justify-content: space-around;
+    /* background-color: orangered; */
+}
+.main .mails ul li .fa-regular{
+    font-size: .8rem;
+    opacity: .35;
+}
+
+.main .mails ul li span:not(.detail,.text){
+    /* border: 1px solid red; */
+    /* width: 160px; */
+}
