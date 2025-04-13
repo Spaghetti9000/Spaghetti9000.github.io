@@ -11,6 +11,6 @@ email_files = [f for f in os.listdir(emails_dir) if f.endswith(".html")]
 with open(os.path.join(emails_dir, "manifest.json"), "w") as manifest_file:
     json.dump(email_files, manifest_file, indent=2)
 
-print("✅ manifest.json generated with the following emails:")
+print("manifest.json generated with the following emails:")
 for f in email_files:
     print("  -", f)
