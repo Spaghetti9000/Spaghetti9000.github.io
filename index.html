@@ -151,5 +151,31 @@
             </div>
         </div>
     </div>
+
+
+    <script>
+        const emailListElement = document.querySelector(".mails ul");
+      
+        async function loadEmailsFromManifest() {
+          try {
+            const manifestResponse = await fetch("emails/manifest.json");
+            const emailFiles = await manifestResponse.json();
+      
+            for (const file of emailFiles) {
+              const response = await fetch(`emails/${file}`);
+              const html = await response.text();
+      
+              const li = document.createElement("li");
+              li.innerHTML = `<a href="#"><i class="fa-regular fa-star"></i>${html}</a>`;
+              emailListElement.appendChild(li);
+            }
+          } catch (error) {
+            console.error("Error loading emails:", error);
+          }
+        }
+      
+        loadEmailsFromManifest();
+      </script>
+      
 </body>
 </html>
