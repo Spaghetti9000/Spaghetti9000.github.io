@@ -1,12 +1,5 @@
 {
-  "files": [
-    "booking.html",
-    "google.html",
-    "ign.html",
-    "spar.html",
-    "ikea.html",
-    "decathlon.html",
-    "nordvpn.html",
-    "h&m.html"
+  "file_pairs": [
+    "decathlon"
   ]
 }
