@@ -18,7 +18,8 @@ function mulberry32(a) {
 }
 
 async function loadManifest() {
-  const response = await fetch(`emails/manifest.json?v=${Date.now()}`);
+  const manifestUrl = `emails/manifest.json?v=${Date.now()}`; // Avoids caching
+  const response = await fetch(manifestUrl);
   const manifest = await response.json();
   return manifest.file_pairs;
 }
