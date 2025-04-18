@@ -15,7 +15,7 @@ function parseParameters() {
 
   if (!seedParam || isNaN(parseInt(seedParam))) {
     document.body.innerHTML =
-      "<h2 style='padding:20px; color:red;'>❌ Missing or invalid <code>seed</code> parameter in URL. Example: <code>?seed=1234</code></h2>";
+      "<h2 style='padding:20px; color:red;'> Missing or invalid. Please click the link in the survey again";
     throw new Error("Missing or invalid seed.");
   }
 
