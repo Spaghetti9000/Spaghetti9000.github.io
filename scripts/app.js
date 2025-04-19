@@ -11,19 +11,22 @@ function mulberry32(a) {
 
 function parseParameters() {
   const params = new URLSearchParams(window.location.search);
-  const seedParam = params.get("id"); // Expecting a plain number like "1234"
+  const seedParam = params.get("id");
 
-  if (!seedParam || isNaN(parseInt(seedParam))) {
+  // Check that it's all digits and not empty
+  if (!seedParam || !/^\d+$/.test(seedParam)) {
     document.body.innerHTML =
-      "<h2 style='padding:20px; color:red;'> Missing or invalid. Please click the link in the survey again";
+      "<h2 style='padding:20px; color:red;'> Missing or invalid. Please click the link in the survey again.</h2>";
     throw new Error("Missing or invalid seed.");
   }
 
-  return parseInt(seedParam);
+  // Pad with extra zeros
+  const seed = seedParam.padStart(10, "0");
+  return seed;
 }
 
 function cleanUrl() {
-  // Clean the URL to remove the encoded seed
+  // Clean the URL to remove the encoded seed. fshd
   const cleanUrl = window.location.origin + window.location.pathname;
   window.history.replaceState({}, document.title, cleanUrl);
 }
@@ -93,11 +96,9 @@ async function loadEmails(seed) {
   const filePairs = await loadManifest();
   const list = document.getElementById("email-list");
 
-  const rngFunction = mulberry32(seed);
-  const randomValues = filePairs.map(() => rngFunction());
-
   const selectedFiles = filePairs.map((filePair, index) => {
-    const useReal = randomValues[index] < 0.5;
+    const digit = parseInt(seed[index], 10);
+    const useReal = digit % 2 === 0;
     return useReal ? `true/${filePair}.html` : `fake/${filePair}.html`;
   });
 
