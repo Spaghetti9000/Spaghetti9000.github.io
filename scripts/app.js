@@ -73,11 +73,14 @@ function createEmailPreview(filename) {
       }
 
       li.innerHTML = `
-        <div style="font-weight: 500;">${filename.replace(".html", "")}</div>
-        <div style="color: #666; font-size: 0.9em;">${
-          previewText || "No preview available."
-        }</div>
-      `;
+      <div style="font-weight: 500;">${filename
+        .split("/")
+        .pop()
+        .replace(".html", "")}</div>
+      <div style="color: #666; font-size: 0.9em;">${
+        previewText || "No preview available."
+      }</div>
+    `;
     });
 
   return li;
@@ -99,7 +102,7 @@ async function loadEmails(seed) {
   const selectedFiles = filePairs.map((filePair, index) => {
     const digit = parseInt(seed[index], 10);
     const useReal = digit % 2 === 0;
-    return useReal ? `true/${filePair}.html` : `fake/${filePair}.html`;
+    return useReal ? `real/${filePair}.html` : `fake/${filePair}.html`;
   });
 
   selectedFiles.forEach((file) => {
