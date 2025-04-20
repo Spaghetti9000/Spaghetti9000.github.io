@@ -104,8 +104,12 @@ async function loadEmails(seed) {
     return useReal ? `real/${filePair}.html` : `fake/${filePair}.html`;
   });
 
-  selectedFiles.sort();
-
+  // Sort the files alphabetically by the filename (ignoring the directories)
+  selectedFiles.sort((a, b) => {
+    const fileA = a.split("/").pop(); // Get the filename part of the path
+    const fileB = b.split("/").pop(); // Get the filename part of the path
+    return fileA.localeCompare(fileB); // Compare filenames alphabetically
+  });
   selectedFiles.forEach((file) => {
     list.appendChild(createEmailPreview(file));
   });
