@@ -71,12 +71,11 @@ function createEmailPreview(filename) {
           break;
         }
       }
-
       li.innerHTML = `
-      <div style="font-weight: 500;">${filename
-        .split("/")
-        .pop()
-        .replace(".html", "")}</div>
+      <div style="font-weight: 500;">${
+        filename.split("/").pop().replace(".html", "").charAt(0).toUpperCase() +
+        filename.split("/").pop().replace(".html", "").slice(1)
+      }</div>
       <div style="color: #666; font-size: 0.9em;">${
         previewText || "No preview available."
       }</div>

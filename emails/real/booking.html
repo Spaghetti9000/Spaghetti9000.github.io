@@ -63,11 +63,11 @@
                                               alt="Booking.com"
                                               border="0"
                                               height="24"
-                                              src="https://mail.google.com/mail/u/2?ui=2&amp;ik=115b8ba85d&amp;attid=0.1&amp;permmsgid=msg-f:1828737643406923697&amp;th=1960fb3296a797b1&amp;view=fimg&amp;fur=ip&amp;permmsgid=msg-f:1828737643406923697&amp;sz=s0-l75-ft&amp;attbid=ANGjdJ_5CLM9M362ljI6MN4f61ENKTEQfK1Ksq2Xfj6As0CcO9mGD5d-ojvfQYuF4aRB8m26LugqfHlEmk7lefV0gmsffJrc1lAIX6f-zziE6mOfHRHppZB7HX0VskM&amp;disp=emb&amp;realattid=ii_1960fb2bdfcc204bfcc1&amp;zw"
                                               style="display: block"
                                               width="144"
                                               class="CToWUd"
                                               data-bit="iit"
+                                              src="https://storage.googleapis.com/fonts-quickstart-389427/font/boobkin.png"
                                             />
                                           </td>
                                         </tr>
@@ -125,11 +125,11 @@
                                                   <td height="30" width="30">
                                                     <img
                                                       height="30"
-                                                      src="https://mail.google.com/mail/u/2?ui=2&amp;ik=115b8ba85d&amp;attid=0.3&amp;permmsgid=msg-f:1828737643406923697&amp;th=1960fb3296a797b1&amp;view=fimg&amp;fur=ip&amp;permmsgid=msg-f:1828737643406923697&amp;sz=s0-l75-ft&amp;attbid=ANGjdJ8pCm3PwyGo2EGZBiDSPekGKllKqj7OW7yiblPXyQ8fuXVX8DynfyviOd52fo3FUWGmBFToQXWb6iDL2UkpKD74C0MoSZdDHFfQJWKgPEbqsuyAzWJewUiqEuw&amp;disp=emb&amp;realattid=ii_1960fb2bdfdc204bfcc3&amp;zw"
                                                       style="display: block"
                                                       width="30"
                                                       class="CToWUd"
                                                       data-bit="iit"
+                                                      src="https://storage.googleapis.com/fonts-quickstart-389427/font/icioiosdfnos.png"
                                                     />
                                                   </td>
                                                 </tr>
@@ -219,7 +219,6 @@
                               alt=""
                               border="0"
                               height="440"
-                              src="https://mail.google.com/mail/u/2?ui=2&amp;ik=115b8ba85d&amp;attid=0.4&amp;permmsgid=msg-f:1828737643406923697&amp;th=1960fb3296a797b1&amp;view=fimg&amp;fur=ip&amp;permmsgid=msg-f:1828737643406923697&amp;sz=s0-l75-ft&amp;attbid=ANGjdJ-Hmfws95tBZs9NGoR7bjD3fSbIXutjNgIeJGUsa3jP-HGsEnwHZIVYOvV24syRwMOrEjkIg3x3FbToMATOF3kBA-DGQNpykdY4uxQ83bXn7QY5E_gEeGWBdVs&amp;disp=emb&amp;realattid=ii_1960fb2bdfdc204bfcc4&amp;zw"
                               style="
                                 display: block;
                                 line-height: 0;
@@ -230,6 +229,7 @@
                               class="CToWUd a6T"
                               data-bit="iit"
                               tabindex="0"
+                              src="https://storage.googleapis.com/fonts-quickstart-389427/font/noname.png"
                             />
                           </td>
                         </tr>
@@ -1508,6 +1508,58 @@
         </tr>
       </tbody>
     </table>
+    <!-- Code injected by live-server -->
+    <script>
+      // <![CDATA[  <-- For SVG support
+      if ("WebSocket" in window) {
+        (function () {
+          function refreshCSS() {
+            var sheets = [].slice.call(document.getElementsByTagName("link"));
+            var head = document.getElementsByTagName("head")[0];
+            for (var i = 0; i < sheets.length; ++i) {
+              var elem = sheets[i];
+              var parent = elem.parentElement || head;
+              parent.removeChild(elem);
+              var rel = elem.rel;
+              if (
+                (elem.href && typeof rel != "string") ||
+                rel.length == 0 ||
+                rel.toLowerCase() == "stylesheet"
+              ) {
+                var url = elem.href.replace(/(&|\?)_cacheOverride=\d+/, "");
+                elem.href =
+                  url +
+                  (url.indexOf("?") >= 0 ? "&" : "?") +
+                  "_cacheOverride=" +
+                  new Date().valueOf();
+              }
+              parent.appendChild(elem);
+            }
+          }
+          var protocol =
+            window.location.protocol === "http:" ? "ws://" : "wss://";
+          var address =
+            protocol + window.location.host + window.location.pathname + "/ws";
+          var socket = new WebSocket(address);
+          socket.onmessage = function (msg) {
+            if (msg.data == "reload") window.location.reload();
+            else if (msg.data == "refreshcss") refreshCSS();
+          };
+          if (
+            sessionStorage &&
+            !sessionStorage.getItem("IsThisFirstTime_Log_From_LiveServer")
+          ) {
+            console.log("Live reload enabled.");
+            sessionStorage.setItem("IsThisFirstTime_Log_From_LiveServer", true);
+          }
+        })();
+      } else {
+        console.error(
+          "Upgrade your browser. This Browser is NOT supported WebSocket for Live-Reloading."
+        );
+      }
+      // ]]>
+    </script>
     <!-- Code injected by live-server -->
     <script>
       // <![CDATA[  <-- For SVG support
