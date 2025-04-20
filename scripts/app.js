@@ -104,6 +104,8 @@ async function loadEmails(seed) {
     return useReal ? `real/${filePair}.html` : `fake/${filePair}.html`;
   });
 
+  selectedFiles.sort();
+
   selectedFiles.forEach((file) => {
     list.appendChild(createEmailPreview(file));
   });
