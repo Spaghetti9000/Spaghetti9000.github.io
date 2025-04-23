@@ -44,12 +44,47 @@ function createEmailPreview(filename) {
   li.style.padding = "15px";
   li.style.cursor = "pointer";
 
-  li.addEventListener("click", () => {
+  li.addEventListener("click", async () => {
     document.getElementById("email-list-view").style.display = "none";
     document.getElementById("email-viewer-container").style.display = "block";
-    document.getElementById("email-viewer").src = `emails/${filename}`;
-  });
 
+    const response = await fetch(`emails/${filename}`);
+    let html = await response.text();
+
+    // Parse HTML
+    const parser = new DOMParser();
+    const doc = parser.parseFromString(html, "text/html");
+
+    // Inject viewport meta tag
+    const meta = document.createElement("meta");
+    meta.name = "viewport";
+    meta.content = "width=device-width, initial-scale=1.0";
+    doc.head.appendChild(meta);
+
+    // Inject responsive CSS
+    const style = document.createElement("style");
+    style.textContent = `
+      body {
+        font-family: Arial, sans-serif;
+        margin: 0;
+        padding: 1rem;
+      }
+      img {
+        max-width: 100%;
+        height: auto;
+      }
+      table {
+        width: 100% !important;
+        max-width: 100%;
+      }
+    `;
+    doc.head.appendChild(style);
+
+    // Serialize modified HTML and inject into iframe
+    const updatedHtml = new XMLSerializer().serializeToString(doc);
+    const iframe = document.getElementById("email-viewer");
+    iframe.srcdoc = updatedHtml;
+  });
   fetch(`emails/${filename}`)
     .then((res) => res.text())
     .then((html) => {
