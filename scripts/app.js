@@ -9,6 +9,19 @@ function mulberry32(a) {
   };
 }
 
+function isMobileDevice() {
+  return /Mobi|Android|iPhone|iPad|iPod/i.test(navigator.userAgent);
+}
+
+function showMobileWarning() {
+  document.body.innerHTML = `
+    <div style="padding: 2rem; font-family: sans-serif; text-align: center;">
+      <h2>This app is best viewed on a desktop or laptop.</h2>
+      <p style="color: #555;">Please switch to a larger screen to view the emails properly.</p>
+    </div>
+  `;
+}
+
 function parseParameters() {
   const params = new URLSearchParams(window.location.search);
   const seedParam = params.get("id");
@@ -44,93 +57,10 @@ function createEmailPreview(filename) {
   li.style.padding = "15px";
   li.style.cursor = "pointer";
 
-  li.addEventListener("click", async () => {
+  li.addEventListener("click", () => {
     document.getElementById("email-list-view").style.display = "none";
     document.getElementById("email-viewer-container").style.display = "block";
-
-    const response = await fetch(`emails/${filename}`);
-    let html = await response.text();
-
-    const parser = new DOMParser();
-    const doc = parser.parseFromString(html, "text/html");
-
-    // Inject viewport
-    let viewport = doc.querySelector('meta[name="viewport"]');
-    if (!viewport) {
-      viewport = document.createElement("meta");
-      viewport.name = "viewport";
-      viewport.content = "width=device-width, initial-scale=1.0";
-      doc.head.appendChild(viewport);
-    }
-
-    // Inject aggressive responsive CSS
-    const style = document.createElement("style");
-    style.textContent = `
-      html, body {
-        margin: 0 !important;
-        padding: 1rem !important;
-        font-family: Arial, sans-serif !important;
-        max-width: 100vw !important;
-        overflow-x: hidden !important;
-        font-size: 16px !important;
-        word-wrap: break-word;
-      }
-  
-      img {
-        max-width: 100% !important;
-        height: auto !important;
-      }
-  
-      table {
-        width: 100% !important;
-        max-width: 100% !important;
-        border-collapse: collapse !important;
-      }
-  
-      td, th {
-        padding: 0.5em !important;
-        word-break: break-word !important;
-      }
-  
-      * {
-        box-sizing: border-box !important;
-      }
-  
-      [style*="width"], [width] {
-        width: auto !important;
-        max-width: 100% !important;
-      }
-  
-      [style*="height"], [height] {
-        height: auto !important;
-      }
-  
-      font, center {
-        all: unset !important;
-      }
-    `;
-    doc.head.appendChild(style);
-
-    // Remove <font>, <center>, and deprecated tags
-    doc.querySelectorAll("font, center, blink, marquee").forEach((el) => {
-      const wrapper = document.createElement("div");
-      wrapper.innerHTML = el.innerHTML;
-      el.replaceWith(...wrapper.childNodes);
-    });
-
-    // Remove inline width/height styles
-    doc.querySelectorAll("[style]").forEach((el) => {
-      el.setAttribute(
-        "style",
-        el
-          .getAttribute("style")
-          .replace(/(?:width|height)\s*:\s*\d+[^;]+;?/gi, "")
-      );
-    });
-
-    const updatedHtml = new XMLSerializer().serializeToString(doc);
-    const iframe = document.getElementById("email-viewer");
-    iframe.srcdoc = updatedHtml;
+    document.getElementById("email-viewer").src = `emails/${filename}`;
   });
 
   fetch(`emails/${filename}`)
@@ -200,6 +130,11 @@ async function loadEmails(seed) {
 
 // Main function calling all helpers
 async function main() {
+  if (isMobileDevice()) {
+    showMobileWarning();
+    return;
+  }
+
   const seed = parseParameters();
   cleanUrl();
 
