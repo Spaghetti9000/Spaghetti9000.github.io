@@ -18,8 +18,11 @@ nav {
   padding: 0 1rem;
 }
 .container-wrapper {
-  min-width: 1300px;
+  width: 100%;
+  max-width: 1300px;
+  margin: 0 auto;
 }
+
 .nav-logo {
   display: flex;
   gap: 0.9rem;
@@ -483,5 +486,41 @@ body {
 
   .content ul {
     flex-direction: column;
+  }
+}
+@media (max-width: 767px) {
+  .nav-search {
+    width: 100%;
+    flex-direction: column;
+    padding: 0.5rem;
+  }
+
+  .nav-search input {
+    width: 100%;
+    margin-top: 0.5rem;
+  }
+
+  .email-list {
+    width: 100%;
+    border-right: none;
+  }
+
+  .email-viewer {
+    padding: 10px;
+  }
+
+  .main .content ul li {
+    padding: 0.5rem 1rem;
+  }
+
+  .main .mails ul li a {
+    flex-direction: column;
+    gap: 0.2rem;
+  }
+
+  .main .mails ul li a .head,
+  .main .mails ul li a .text,
+  .main .mails ul li a .time {
+    flex: 1 1 100%;
   }
 }
