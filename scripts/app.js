@@ -51,40 +51,88 @@ function createEmailPreview(filename) {
     const response = await fetch(`emails/${filename}`);
     let html = await response.text();
 
-    // Parse HTML
     const parser = new DOMParser();
     const doc = parser.parseFromString(html, "text/html");
 
-    // Inject viewport meta tag
-    const meta = document.createElement("meta");
-    meta.name = "viewport";
-    meta.content = "width=device-width, initial-scale=1.0";
-    doc.head.appendChild(meta);
+    // Inject viewport
+    let viewport = doc.querySelector('meta[name="viewport"]');
+    if (!viewport) {
+      viewport = document.createElement("meta");
+      viewport.name = "viewport";
+      viewport.content = "width=device-width, initial-scale=1.0";
+      doc.head.appendChild(viewport);
+    }
 
-    // Inject responsive CSS
+    // Inject aggressive responsive CSS
     const style = document.createElement("style");
     style.textContent = `
-      body {
-        font-family: Arial, sans-serif;
-        margin: 0;
-        padding: 1rem;
+      html, body {
+        margin: 0 !important;
+        padding: 1rem !important;
+        font-family: Arial, sans-serif !important;
+        max-width: 100vw !important;
+        overflow-x: hidden !important;
+        font-size: 16px !important;
+        word-wrap: break-word;
       }
+  
       img {
-        max-width: 100%;
-        height: auto;
+        max-width: 100% !important;
+        height: auto !important;
       }
+  
       table {
         width: 100% !important;
-        max-width: 100%;
+        max-width: 100% !important;
+        border-collapse: collapse !important;
+      }
+  
+      td, th {
+        padding: 0.5em !important;
+        word-break: break-word !important;
+      }
+  
+      * {
+        box-sizing: border-box !important;
+      }
+  
+      [style*="width"], [width] {
+        width: auto !important;
+        max-width: 100% !important;
+      }
+  
+      [style*="height"], [height] {
+        height: auto !important;
+      }
+  
+      font, center {
+        all: unset !important;
       }
     `;
     doc.head.appendChild(style);
 
-    // Serialize modified HTML and inject into iframe
+    // Remove <font>, <center>, and deprecated tags
+    doc.querySelectorAll("font, center, blink, marquee").forEach((el) => {
+      const wrapper = document.createElement("div");
+      wrapper.innerHTML = el.innerHTML;
+      el.replaceWith(...wrapper.childNodes);
+    });
+
+    // Remove inline width/height styles
+    doc.querySelectorAll("[style]").forEach((el) => {
+      el.setAttribute(
+        "style",
+        el
+          .getAttribute("style")
+          .replace(/(?:width|height)\s*:\s*\d+[^;]+;?/gi, "")
+      );
+    });
+
     const updatedHtml = new XMLSerializer().serializeToString(doc);
     const iframe = document.getElementById("email-viewer");
     iframe.srcdoc = updatedHtml;
   });
+
   fetch(`emails/${filename}`)
     .then((res) => res.text())
     .then((html) => {
