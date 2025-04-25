@@ -19,6 +19,9 @@ matching_email_files = [
     if f in fake_email_files
 ]
 
+# Sort alphabetically
+matching_email_files.sort()
+
 # Wrap the list in a dict with a "file_pairs" key
 manifest_data = {"file_pairs": matching_email_files}
 
@@ -29,4 +32,3 @@ with open(os.path.join(emails_dir, "manifest.json"), "w") as manifest_file:
 print("manifest.json generated with the following email pairs:")
 for email in matching_email_files:
     print(f"  - {email}")
-#
