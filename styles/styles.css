@@ -384,39 +384,43 @@ body {
   transition: top 0.3s ease; /* Smooth transition */
 }
 
-/* === Mobile Responsiveness === */
+/* Mobile and Tablet Responsiveness for Email Inbox */
 @media (max-width: 768px) {
+  /* General adjustments */
   .container-wrapper {
     min-width: 100%;
-    padding: 0 1rem;
+    padding: 0 0.5rem;
   }
 
   nav {
     flex-direction: column;
+    align-items: flex-start;
     height: auto;
-    padding: 1rem;
-    gap: 1rem;
+    gap: 0.5rem;
+    padding: 0.8rem;
+  }
+
+  .nav-logo {
+    gap: 0.5rem;
   }
 
   .nav-logo span {
-    font-size: 1.2rem;
+    font-size: 1.4rem;
   }
 
   .nav-search {
     width: 100%;
   }
 
-  .nav-search input {
-    flex: 1;
-  }
-
   .nav-aside {
     gap: 0.5rem;
+    margin-left: auto;
   }
 
+  /* Sidebar collapses to topbar items */
   .grid-content {
-    display: flex;
     flex-direction: column;
+    overflow-x: hidden;
   }
 
   .leftnav,
@@ -424,7 +428,9 @@ body {
     flex-direction: row;
     width: 100%;
     height: auto;
+    background-color: transparent;
     justify-content: center;
+    gap: 1rem;
     padding: 0.5rem 0;
   }
 
@@ -440,40 +446,56 @@ body {
     padding: 0.5rem;
   }
 
+  /* Main Email Area */
   .main {
+    padding: 0;
     width: 100%;
-    padding: 0 0.5rem;
+  }
+
+  .main .content ul {
+    display: flex;
+    overflow-x: auto;
   }
 
   .main .content ul li {
-    padding: 0.5rem;
+    flex: 0 0 auto;
+    padding: 0.7rem 1rem;
+    white-space: nowrap;
   }
 
+  /* Email List Adjustments */
   .main .mails ul li a {
     flex-direction: column;
     align-items: flex-start;
+    gap: 0.2rem;
   }
 
   .main .mails ul li a .head,
   .main .mails ul li a .text,
   .main .mails ul li a .time {
-    flex: none;
     width: 100%;
-  }
-
-  #back-to-inbox {
-    padding: 15px;
-    font-size: 0.9rem;
+    flex: none;
   }
 
   .email-list {
     width: 100%;
     border-right: none;
     border-bottom: 1px solid #ccc;
+    padding: 0.5rem;
+  }
+
+  .email-box {
+    padding: 10px;
   }
 
   .email-viewer {
     padding: 10px;
+  }
+
+  /* Back to inbox button */
+  #back-to-inbox {
+    padding: 15px;
+    font-size: 0.9rem;
   }
 }
 
@@ -483,7 +505,7 @@ body {
   }
 
   .nav-logo span {
-    font-size: 1rem;
+    font-size: 1.2rem;
   }
 
   .nav-search {
@@ -495,8 +517,15 @@ body {
     width: 100%;
   }
 
+  /* Optional: stack left and right nav items vertically if needed */
   .leftnav ul,
   .rightnav ul {
     flex-direction: column;
+    align-items: center;
+  }
+
+  .leftnav ul li,
+  .rightnav ul li {
+    padding: 0.3rem;
   }
 }
