@@ -131,10 +131,10 @@ async function loadEmails(seed) {
 
 // Main function calling all helpers
 async function main() {
-  if (isMobileDevice()) {
-    // showMobileWarning();
-    return;
-  }
+  // if (isMobileDevice()) {
+  //   // showMobileWarning();
+  //   return;
+  // }
 
   const seed = parseParameters();
   cleanUrl();
