@@ -61,6 +61,7 @@ function createEmailPreview(filename) {
     document.getElementById("email-list-view").style.display = "none";
     document.getElementById("email-viewer-container").style.display = "block";
     document.getElementById("email-viewer").src = `emails/${filename}`;
+    window.scrollTo({ top: 0, behavior: "smooth" });
   });
 
   fetch(`emails/${filename}`)
@@ -140,6 +141,7 @@ async function main() {
 
   // Finally load emails
   await loadEmails(seed);
+  window.scrollTo({ top: 0, behavior: "smooth" });
 }
 
 // Event listener for back to inbox
