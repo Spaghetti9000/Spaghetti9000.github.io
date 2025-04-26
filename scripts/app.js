@@ -9,8 +9,9 @@ function mulberry32(a) {
   };
 }
 
+// Function to check if the device is mobile
 function isMobileDevice() {
-  return /Mobi|Android|iPhone|iPad|iPod/i.test(navigator.userAgent);
+  return /Mobi|Android|iPhone|iPod/i.test(navigator.userAgent);
 }
 
 function showMobileWarning() {
@@ -112,9 +113,6 @@ async function loadEmails(seed) {
   const filePairs = await loadManifest();
   const list = document.getElementById("email-list");
 
-  // Inject the viewport meta tag for mobile responsiveness
-  injectViewportMetaTag();
-
   const selectedFiles = filePairs.map((filePair, index) => {
     const digit = parseInt(seed[index], 10);
     const useReal = digit % 2 === 0;
@@ -127,59 +125,17 @@ async function loadEmails(seed) {
     const fileB = b.split("/").pop(); // Get the filename part of the path
     return fileA.localeCompare(fileB); // Compare filenames alphabetically
   });
-
-  // Append each email preview dynamically
   selectedFiles.forEach((file) => {
     list.appendChild(createEmailPreview(file));
   });
-
-  // Inject responsive styles for mobile (optional)
-  injectResponsiveCSS();
-}
-
-// Function to inject the viewport meta tag
-function injectViewportMetaTag() {
-  const meta = document.createElement("meta");
-  meta.name = "viewport";
-  meta.content = "width=device-width, initial-scale=1.0";
-  document.head.appendChild(meta);
-}
-
-// Function to inject responsive CSS rules
-function injectResponsiveCSS() {
-  const style = document.createElement("style");
-  style.innerHTML = `
-    /* Mobile and Tablet responsiveness */
-    @media (max-width: 768px) {
-      body {
-        font-size: 14px; /* Smaller font size for mobile */
-      }
-      #email-list {
-        padding: 10px;
-      }
-      .email-preview {
-        display: block;
-        padding: 1rem;
-        margin-bottom: 1rem;
-        font-size: 1rem;
-      }
-      /* Ensure email content scales */
-      .email-content {
-        width: 100%;
-        max-width: 100%;
-        overflow-x: hidden;
-      }
-    }
-  `;
-  document.head.appendChild(style);
 }
 
 // Main function calling all helpers
 async function main() {
-  // if (isMobileDevice()) {
-  //   // showMobileWarning();
-  //   return;
-  // }
+  if (isMobileDevice()) {
+    showMobileWarning();
+    return;
+  }
 
   const seed = parseParameters();
   cleanUrl();
