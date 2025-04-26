@@ -393,28 +393,23 @@ body {
   }
 
   nav {
-    flex-direction: column;
-    align-items: flex-start;
-    height: auto;
-    gap: 0.5rem;
-    padding: 0.8rem;
+    display: none;
   }
 
   .nav-logo {
-    gap: 0.5rem;
+    display: none;
   }
 
   .nav-logo span {
-    font-size: 1.4rem;
+    display: none;
   }
 
   .nav-search {
-    width: 100%;
+    display: none;
   }
 
   .nav-aside {
-    gap: 0.5rem;
-    margin-left: auto;
+    display: none;
   }
 
   /* Sidebar collapses to topbar items */
@@ -425,25 +420,17 @@ body {
 
   .leftnav,
   .rightnav {
-    flex-direction: row;
-    width: 100%;
-    height: auto;
-    background-color: transparent;
-    justify-content: center;
-    gap: 1rem;
-    padding: 0.5rem 0;
+    display: none;
   }
 
   .leftnav ul,
   .rightnav ul {
-    display: flex;
-    flex-direction: row;
-    justify-content: center;
+    display: none;
   }
 
   .leftnav ul li,
   .rightnav ul li {
-    padding: 0.5rem;
+    display: none;
   }
 
   /* Main Email Area */
@@ -458,9 +445,7 @@ body {
   }
 
   .main .content ul li {
-    flex: 0 0 auto;
-    padding: 0.7rem 1rem;
-    white-space: nowrap;
+    display: none;
   }
 
   /* Email List Adjustments */
@@ -473,8 +458,7 @@ body {
   .main .mails ul li a .head,
   .main .mails ul li a .text,
   .main .mails ul li a .time {
-    width: 100%;
-    flex: none;
+    display: none;
   }
 
   .email-list {
@@ -500,6 +484,9 @@ body {
 }
 
 @media (max-width: 480px) {
+  .element {
+    font-size: clamp(0.8rem, 4vw, 1.5rem); /* Smaller sizes on mobile */
+  }
   nav {
     padding: 0.5rem;
   }
@@ -520,8 +507,7 @@ body {
   /* Optional: stack left and right nav items vertically if needed */
   .leftnav ul,
   .rightnav ul {
-    flex-direction: column;
-    align-items: center;
+    display: none;
   }
 
   .leftnav ul li,
