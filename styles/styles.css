@@ -383,3 +383,120 @@ body {
   will-change: top;
   transition: top 0.3s ease; /* Smooth transition */
 }
+
+/* === Mobile Responsiveness === */
+@media (max-width: 768px) {
+  .container-wrapper {
+    min-width: 100%;
+    padding: 0 1rem;
+  }
+
+  nav {
+    flex-direction: column;
+    height: auto;
+    padding: 1rem;
+    gap: 1rem;
+  }
+
+  .nav-logo span {
+    font-size: 1.2rem;
+  }
+
+  .nav-search {
+    width: 100%;
+  }
+
+  .nav-search input {
+    flex: 1;
+  }
+
+  .nav-aside {
+    gap: 0.5rem;
+  }
+
+  .grid-content {
+    display: flex;
+    flex-direction: column;
+  }
+
+  .leftnav,
+  .rightnav {
+    flex-direction: row;
+    width: 100%;
+    height: auto;
+    justify-content: center;
+    padding: 0.5rem 0;
+  }
+
+  .leftnav ul,
+  .rightnav ul {
+    display: flex;
+    flex-direction: row;
+    justify-content: center;
+  }
+
+  .leftnav ul li,
+  .rightnav ul li {
+    padding: 0.5rem;
+  }
+
+  .main {
+    width: 100%;
+    padding: 0 0.5rem;
+  }
+
+  .main .content ul li {
+    padding: 0.5rem;
+  }
+
+  .main .mails ul li a {
+    flex-direction: column;
+    align-items: flex-start;
+  }
+
+  .main .mails ul li a .head,
+  .main .mails ul li a .text,
+  .main .mails ul li a .time {
+    flex: none;
+    width: 100%;
+  }
+
+  #back-to-inbox {
+    padding: 15px;
+    font-size: 0.9rem;
+  }
+
+  .email-list {
+    width: 100%;
+    border-right: none;
+    border-bottom: 1px solid #ccc;
+  }
+
+  .email-viewer {
+    padding: 10px;
+  }
+}
+
+@media (max-width: 480px) {
+  nav {
+    padding: 0.5rem;
+  }
+
+  .nav-logo span {
+    font-size: 1rem;
+  }
+
+  .nav-search {
+    flex-direction: column;
+    gap: 0.5rem;
+  }
+
+  .nav-search input {
+    width: 100%;
+  }
+
+  .leftnav ul,
+  .rightnav ul {
+    flex-direction: column;
+  }
+}
